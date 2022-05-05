@@ -2,7 +2,7 @@
 const http = require("http");
 const routes = require("./routes");
 // http.createServer(rqListener)
-// //OR
+//OR
 
 const server = http.createServer(routes.handler);
 

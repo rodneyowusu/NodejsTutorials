@@ -1,23 +1,24 @@
-//Creating A Server
-const http = require("http");
-
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log("In the Middleware");
-  next(); //Allows request to move to the next middleware.
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use("/add-product", (req, res, next) => {
+  res.send(
+    '<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>'
+  );
 });
 
-app.use((req, res, next) => {
-  console.log("In the second Middleware");
-  res.send("Hello From Express");
+app.post("/product", (req, res, next) => {
+  const obj = JSON.parse(JSON.stringify(req.body)); //This line will prevent [Object: null prototype]
+  console.log(obj);
+  res.redirect("/");
 });
 
-//app becomes a valid request handler
-// const server = http.createServer(app);
-// server.listen(3000);
+app.use("/", (req, res, next) => {
+  res.send("<h1>Hello from Express!</h1>");
+});
 
-//Express way for trhe create server
 app.listen(3000);

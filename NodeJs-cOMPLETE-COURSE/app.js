@@ -12,7 +12,7 @@ app.use("/add-product", (req, res, next) => {
 });
 
 app.post("/product", (req, res, next) => {
-  const obj = JSON.parse(JSON.stringify(req.body)); //This line will prevent [Object: null prototype]
+  const obj = JSON.parse(JSON.stringify(req.body)); //This line will prevent [Object: null prototype].
   console.log(obj);
   res.redirect("/");
 });
